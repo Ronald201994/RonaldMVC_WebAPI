@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RonaldMC.Project.MVC.Models;
+using RonaldMC.Project.MVC.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -10,25 +12,16 @@ namespace RonaldMC.Project.MVC.Controllers
 {
     public class HouseController : Controller
     {
-        // GET: House
+        //Client client = new Client();
+        private readonly IClient _client;
+        public HouseController(IClient client)
+        {
+            _client = client;
+        }
+        //GET: House
         public ActionResult Index()
         {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("http://localhost:58780/");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                var response = client.GetAsync("api/House").Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    ViewBag.resultAPI = response.Content.ReadAsStringAsync().Result;
-                }
-                else
-                {
-                    ViewBag.resultAPI = "Error";
-                }
-            }
-
+            ViewBag.resultAPI = _client.GetAPI();
             return View();
         }
     }

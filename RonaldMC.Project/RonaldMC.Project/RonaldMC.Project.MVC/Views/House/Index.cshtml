@@ -5,8 +5,37 @@
 
 <h2>Building my house</h2>
 
-@foreach (var c in ViewBag.resultAPI)
+@*@foreach (var c in ViewBag.resultAPI)
 {
     <a>@c</a>
-}
+}*@
+<div>
+    <table>
+        <tr>
+            <td>@ViewBag.resultAPI</td>       
+        </tr>
+        <tr>
+            <td>
+                @*@if (Session["numberIncrease"] != null)
+        {
+            ViewBag.conteo = (int)Session["numberIncrease"] + 1;
+            Session["numberIncrease"] = ViewBag.conteo;
 
+
+            @ViewBag.mensaje;
+        }*@
+                @ViewBag.conteo
+                @*@ViewBag.conteo = @Session["numberIncrease"];
+        @ViewBag.conteo;*@
+
+            </td>
+        </tr>
+        <tr>
+            @*<td>@ViewBag.mensaje+</td>*@
+        </tr>
+    </table>
+</div>
+
+<div>
+    @Html.ActionLink("Return to bulding a house", "Count")
+</div>   

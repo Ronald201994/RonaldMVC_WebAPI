@@ -12,6 +12,8 @@ namespace RonaldMC.Project.MVC.Controllers
 {
     public class HouseController : Controller
     {
+        House h = new House(); 
+
         //Client client = new Client();
         private readonly IClient _client;
         public HouseController(IClient client)
@@ -21,8 +23,28 @@ namespace RonaldMC.Project.MVC.Controllers
         //GET: House
         public ActionResult Index()
         {
+            int conteo = 0;
+                conteo = Convert.ToInt16(Session["numberIncrease"]) + 1;
+                Session["numberIncrease"] = conteo;
+                ViewBag.conteo= "Number of building house: "+ Session["numberIncrease"];
+ 
             ViewBag.resultAPI = _client.GetAPI();
             return View();
+        }
+
+        public ActionResult Count()
+        {
+            //ViewBag.mensaje = "null";
+            //ViewBag.number = 1;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Count(string mensaje=null) 
+        {
+            //ViewBag.resultAPI = _client.GetAPI();
+            //return View();
+            return RedirectToAction("Index");
         }
     }
 }
